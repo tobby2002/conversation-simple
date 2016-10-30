@@ -16,7 +16,7 @@
 
 'use strict';
 
-var app = require('../app');
+var app = require('../app_mr');
 var bodyParser = require('body-parser');
 var request = require('supertest');
 

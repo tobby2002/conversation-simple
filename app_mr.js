@@ -17,7 +17,6 @@
 'use strict';
 
 require( 'dotenv' ).config( {silent: true} );
-
 var express = require( 'express' );  // app server
 var bodyParser = require( 'body-parser' );  // parser for post requests
 var Watson = require( 'watson-developer-cloud/conversation/v1' );  // watson sdk
@@ -63,11 +62,35 @@ var conversation = new Watson( {
 //   version: 'v1'
 // } );
 
+// http://stackoverflow.com/questions/6158933/how-to-make-an-http-post-request-in-node-js
+// Parameters
+// domain: example.com
+// port:80
+// timeout: 600 secs
+// ssl:true,
+// debug: true
+// json response:true
+var SimpleAPI = require('./simpleapi.js');
+var api = new SimpleAPI('127.0.0.1', 8000, 1000 * 600, false, true, true);
+
+var headers = {
+  'Content-Type' : 'application/json',
+  'Accept' : 'application/json'
+};
+// var params = {
+//   "dir" : "post-test"
+// };
+var params = false;
+var method = '/api/v0/mrtalk/message';
+var request = require('request');
+
+
 // Endpoint to be call from the client side
 // workspace_id: 꽃배달 : 5686755c-5e5d-4c14-ae1f-6347639977f8
 // workspace_id: car_dashboard : ec688cd9-6a64-4a3b-834d-b9e2b2f6b921
 app.post( '/api/message', function(req, res) {
   var workspace = process.env.WORKSPACE_ID || 'ec688cd9-6a64-4a3b-834d-b9e2b2f6b921';
+  // var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
   if ( !workspace || workspace === '<workspace-id>' ) {
     return res.json( {
       'output': {
@@ -78,11 +101,55 @@ app.post( '/api/message', function(req, res) {
       }
     } );
   }
+  // var payload = {
+  //   workspace_id: workspace,
+  //   context: {},
+  //   input: {}
+  // };
+
   var payload = {
-    workspace_id: workspace,
-    context: {},
-    input: {}
+    "workspace_id": workspace,
+    "context": {
+      "conversation_id": "5166477c-2448-4968-9d31-77a1a583b167",
+      "system": {
+        "dialog_stack": [
+          {
+            "dialog_node": "node_1_1467994455318"
+          }
+        ],
+        "dialog_turn_counter": 1,
+        "dialog_request_counter": 1
+      },
+      "default_counter": 0,
+      "reprompt": false
+    },
+    "input": {
+      "text": "hi"
+    }
   };
+
+  // var payload =
+  // {
+  //   "input": {
+  //     "text": "Do you have a phone? call"
+  //   },
+  //   "context": {
+  //     "conversation_id": "5166477c-2448-4968-9d31-77a1a583b167",
+  //     "system": {
+  //       "dialog_stack": [
+  //         {
+  //           "dialog_node": "node_1_1467994455318"
+  //         }
+  //       ],
+  //       "dialog_turn_counter": 1,
+  //       "dialog_request_counter": 1
+  //     },
+  //     "default_counter": 0,
+  //     "reprompt": false
+  //   }
+  // }
+
+
   if ( req.body ) {
     if ( req.body.input ) {
       payload.input = req.body.input;
@@ -92,13 +159,53 @@ app.post( '/api/message', function(req, res) {
       payload.context = req.body.context;
     }
   }
-  // Send the input to the conversation service
-  conversation.message( payload, function(err, data) {
+
+  // api.Post(method, headers, params, payload
+  //     , function(response) { // success
+  //       console.log( response );
+  //       // return response.json( updateMessage( payload, data )
+  //       updatedmsg = updateMessage( payload, response.data);
+  //       return response.json( updatedmsg );
+  //     }
+  //     , function(error) { // error
+  //       console.log( error.toString() );
+  //       return response.status( error.code || 500 ).json( error );
+  //     }
+  //     , function(error) { // timeout
+  //       console.log( new Error('timeout error') );
+  //     });
+
+
+  var options = {
+    uri: 'http://127.0.0.1:8000/api/v0/mrtalk/message',
+    method: 'POST',
+    json: payload
+  };
+
+  request(options, function(err, response, body) {
     if ( err ) {
       return res.status( err.code || 500 ).json( err );
     }
-    return res.json( updateMessage( payload, data ) );
-  } );
+    var hangul_ok_body = JSON.stringify(body)
+    return res.json( updateMessage( payload, JSON.parse(hangul_ok_body) ) );
+  });
+
+  // api.Post( method, headers, params, payload
+  //     , function(err, data) {
+  //       if ( err ) {
+  //         return res.status( err.code || 500 ).json( err );
+  //       }
+  //       return res.json( updateMessage( payload, data ) );
+  //     });
+
+  // Send the input to the conversation service
+  // conversation.message( payload, function(err, data) {
+  //   if ( err ) {
+  //     return res.status( err.code || 500 ).json( err );
+  //   }
+  //   return res.json( updateMessage( payload, data ) );
+  // } );
+
 } );
 
 /**
@@ -111,7 +218,7 @@ function updateMessage(input, response) {
   var responseText = null;
   var id = null;
   if ( !response.output ) {
-    response.output = {};
+    //response.output = {};
   } else {
     if ( logs ) {
       // If the logs db is set, then we want to record all input and responses
@@ -235,3 +342,4 @@ if ( cloudantUrl ) {
 }
 
 module.exports = app;
+

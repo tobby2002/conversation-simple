@@ -81,6 +81,7 @@ div {
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100% - 4rem);
+  margin-left: -0.5rem;
 }
 
 .message-inner {
@@ -171,21 +172,29 @@ div {
 }
 
 .from-watson p {
-  margin: 0.3125rem;
+  margin: 1.3125rem;
   padding: 0 1.25rem;
 }
 
 .from-watson.latest.top p:before {
   content: ".";
   color: #9855D4;
-  background-image: url("../img/marker_image.png");
-  background-size: 0.3125rem 1.3125rem;
+  /*background-image: url("../img/marker_image.png");*/
+  background-image: url("../img/mrtalk64x64.png");
+  /*background-size: 0.3125rem 1.3125rem;*/
+  background-size: 2.3125rem 2.3125rem;
   position: absolute;
   z-index: 2;
+  /*left: 0.4375rem;*/
   left: 0.4375rem;
-  width: 0.3125rem;
-  height: 1.3125rem;
-  line-height: 1.3125rem;
+  /*width: 0.3125rem;*/
+  width: 2.3125rem;
+  /*height: 1.3125rem;*/
+  height: 2.3125rem;
+  /*line-height: 1.3125rem;*/
+  line-height: 2.3125rem;
+  margin-top: -0.6250rem;
+  margin-left: -0.4125rem;
 }
 
 #textInput {
@@ -201,7 +210,6 @@ div {
   padding-left: 0.125rem;
   margin-bottom: -0.125rem;
   font-family: Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, sans-serif;
-
 }
 
 #textInput.underline {

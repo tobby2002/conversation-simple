@@ -1,0 +1,60 @@
+{
+  "name": "Car_Dashboard",
+  "created": "2016-07-22T04:55:54.661Z",
+  "intents": [
+    {
+      "intent": "capabilities",
+      "created": "2016-07-22T04:55:54.661Z",
+      "examples": [
+        {
+          "text": "can I manipulate the",
+          "created": "2016-07-22T04:55:54.661Z"
+        }
+      ],
+      "description": null
+    }
+  ],
+  "entities": [
+    {
+      "entity": "amenity",
+      "values": [
+        {
+          "value": "gas",
+          "created": "2016-07-22T04:55:54.661Z",
+          "metadata": null,
+          "synonyms": [
+            "fuel",
+            "fuel station",
+            "pumps"
+          ]
+        }
+      ],
+      "created": "2016-07-22T04:55:54.661Z",
+      "open_list": false,
+      "description": null
+    }
+  ],
+  "language": "en",
+  "metadata": null,
+  "modified": "2016-07-29T20:43:10.992Z",
+  "created_by": null,
+  "description": "Cognitive Car Dashboard workspace which allows multi-turn conversations to perform tasks in the car.",
+  "modified_by": null,
+  "dialog_nodes": [
+    {
+      "go_to": null,
+      "output": {
+        "text": "Great choice! Playing some @genre music for you."
+      },
+      "parent": "node_1_1467232431348",
+      "context": null,
+      "created": "2016-07-22T04:55:54.661Z",
+      "metadata": null,
+      "conditions": "@genre",
+      "description": null,
+      "dialog_node": "node_5_1469049934217",
+      "previous_sibling": null
+    }
+  ],
+  "workspace_id": "d9cf2651-126b-47f7-a91e-d6895b144acc"
+}
