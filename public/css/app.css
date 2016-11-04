@@ -81,7 +81,6 @@ div {
   overflow-y: auto;
   overflow-x: hidden;
   height: calc(100% - 4rem);
-  margin-left: -0.5rem;
 }
 
 .message-inner {
