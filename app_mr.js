@@ -118,7 +118,8 @@ app.post( '/api/message', function(req, res) {
 
   request(options, function(err, response, body) {
     if ( err ) {
-      return res.status( err.code || 500 ).json( err );
+      // return res.status( err.code || 500 ).json( err );
+      return res.status(err.code ? 200 : 500).json( err );
     }
     return res.json( updateMessage( payload, JSON.parse(JSON.stringify(body)) ) );
   });
