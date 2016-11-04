@@ -20,6 +20,7 @@ require( 'dotenv' ).config( {silent: true} );
 var express = require( 'express' );  // app server
 var bodyParser = require( 'body-parser' );  // parser for post requests
 var Watson = require( 'watson-developer-cloud/conversation/v1' );  // watson sdk
+var request = require('request');
 
 // The following requires are needed for logging purposes
 var uuid = require( 'uuid' );
@@ -52,37 +53,7 @@ var conversation = new Watson( {
   version: 'v1'
 } );
 
-
-// // Create the Mr.TALK service  wrapper neo@
-// var conversation = new MrTALK( {
-//   url: 'https://mrtalk.co.kr/api/v1/conversation',
-//   username: process.env.CONVERSATION_USERNAME || '<user_id_for_MrTALK>',
-//   password: process.env.CONVERSATION_PASSWORD || '<user_password_for_MrTALK>',
-//   version_date: '2016-09-20',
-//   version: 'v1'
-// } );
-
-// http://stackoverflow.com/questions/6158933/how-to-make-an-http-post-request-in-node-js
-// Parameters
-// domain: example.com
-// port:80
-// timeout: 600 secs
-// ssl:true,
-// debug: true
-// json response:true
-var SimpleAPI = require('./simpleapi.js');
-var api = new SimpleAPI('127.0.0.1', 8000, 1000 * 600, false, true, true);
-
-var headers = {
-  'Content-Type' : 'application/json',
-  'Accept' : 'application/json'
-};
-// var params = {
-//   "dir" : "post-test"
-// };
-var params = false;
-var method = '/api/v0/mrtalk/message';
-var request = require('request');
+// http://stackoverflow.com/questions/6158933/how-to-make-an-http-post-request-in-node-js SimpleAPI
 
 
 // Endpoint to be call from the client side
@@ -114,41 +85,19 @@ app.post( '/api/message', function(req, res) {
       "system": {
         "dialog_stack": [
           {
-            "dialog_node": "node_1_1467994455318"
+            "dialog_node": "root"
           }
         ],
-        "dialog_turn_counter": 1,
-        "dialog_request_counter": 1
+        "dialog_turn_counter": 0,
+        "dialog_request_counter": 0
       },
       "default_counter": 0,
       "reprompt": false
     },
     "input": {
-      "text": "hi"
+      "text": ""
     }
   };
-
-  // var payload =
-  // {
-  //   "input": {
-  //     "text": "Do you have a phone? call"
-  //   },
-  //   "context": {
-  //     "conversation_id": "5166477c-2448-4968-9d31-77a1a583b167",
-  //     "system": {
-  //       "dialog_stack": [
-  //         {
-  //           "dialog_node": "node_1_1467994455318"
-  //         }
-  //       ],
-  //       "dialog_turn_counter": 1,
-  //       "dialog_request_counter": 1
-  //     },
-  //     "default_counter": 0,
-  //     "reprompt": false
-  //   }
-  // }
-
 
   if ( req.body ) {
     if ( req.body.input ) {
@@ -160,24 +109,9 @@ app.post( '/api/message', function(req, res) {
     }
   }
 
-  // api.Post(method, headers, params, payload
-  //     , function(response) { // success
-  //       console.log( response );
-  //       // return response.json( updateMessage( payload, data )
-  //       updatedmsg = updateMessage( payload, response.data);
-  //       return response.json( updatedmsg );
-  //     }
-  //     , function(error) { // error
-  //       console.log( error.toString() );
-  //       return response.status( error.code || 500 ).json( error );
-  //     }
-  //     , function(error) { // timeout
-  //       console.log( new Error('timeout error') );
-  //     });
-
-
   var options = {
-    uri: 'http://127.0.0.1:8000/api/v0/mrtalk/message',
+    //uri: 'http://127.0.0.1:8000/api/v0/mrtalk/message',
+    uri: 'http://45.32.106.253:8000/api/v0/mrtalk/message',
     method: 'POST',
     json: payload
   };
@@ -186,25 +120,8 @@ app.post( '/api/message', function(req, res) {
     if ( err ) {
       return res.status( err.code || 500 ).json( err );
     }
-    var hangul_ok_body = JSON.stringify(body)
-    return res.json( updateMessage( payload, JSON.parse(hangul_ok_body) ) );
+    return res.json( updateMessage( payload, JSON.parse(JSON.stringify(body)) ) );
   });
-
-  // api.Post( method, headers, params, payload
-  //     , function(err, data) {
-  //       if ( err ) {
-  //         return res.status( err.code || 500 ).json( err );
-  //       }
-  //       return res.json( updateMessage( payload, data ) );
-  //     });
-
-  // Send the input to the conversation service
-  // conversation.message( payload, function(err, data) {
-  //   if ( err ) {
-  //     return res.status( err.code || 500 ).json( err );
-  //   }
-  //   return res.json( updateMessage( payload, data ) );
-  // } );
 
 } );
 
@@ -242,7 +159,16 @@ function updateMessage(input, response) {
       responseText = 'I did not understand your intent';
     }
   }
-  response.output.text = responseText;
+
+  try {
+      process.stdout.write(response.toString());
+      response.output.text = responseText;
+  } catch (exception) {
+      console.log(exception);
+      process.stdout.write(exception.toString());
+
+  }
+
   if ( logs ) {
     // If the logs db is set, then we want to record all input and responses
     id = uuid.v4();
