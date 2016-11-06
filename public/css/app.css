@@ -436,3 +436,114 @@ html{
   font-weight: normal;
   font-style: normal;
 }
+
+
+
+
+
+
+
+@import url(http://thecodeplayer.com/uploads/fonts/fontawesome/css/font-awesome.min.css);
+
+
+.container {
+  width:150px;
+  background-color:#e74c3c;
+  display:block;
+  margin:100px auto 0px auto;
+  border-radius:100%;
+  box-shadow:0px 0px 15px 2px #bdc3c7;
+  cursor:pointer;
+  transition:.3s all ease-in;
+  position:relative;
+}
+
+.icon-microphone {
+  color:white;
+  font-size:60px;
+  line-height:150px;
+  display:block;
+  text-align:center;
+  transition:.1s all ease-in;
+}
+
+.outer {
+  width:148px;
+  height:148px;
+  -webkit-transform:scale(1);
+  border-radius:100%;
+  position:absolute;
+  background-color:transparent;
+  border:1px solid #7f8c8d;
+  z-index:-1;
+  transition:1s all ease;
+  -webkit-animation: woong 1s infinite;
+}
+
+.outer-2 {
+  width:150px;
+  height:150px;
+  -webkit-transform:scale(1);
+  border-radius:100%;
+  position:absolute;
+  background-color:#bdc3c7;
+  z-index:-1;
+  transition:1s all ease;
+  -webkit-animation: woong-2 1s infinite;
+  -webkit-animation-delay:2s;
+}
+
+@-webkit-keyframes woong {
+  0% { -webkit-trasform:scale(1.2); }
+  50% { -webkit-transform:scale(1.8);
+    opacity:0.5;
+  }
+  100% { -webkit-transform:scale(2.4);
+    opacity:0; }
+}
+
+@-webkit-keyframes woong-2 {
+  0% { -webkit-transform:scale(1.2);
+    opacity:0.6; }
+  50% { -webkit-transform:scale(1.6);
+    opacity:0.5;
+  }
+  100% { -webkit-transform:scale(2);
+    opacity:0; }
+}
+
+/*
+.container:hover .outer {
+  -webkit-transform:scale(2.3);
+  opacity:0;
+}
+*/
+.container:hover {
+  background-color:#27ae60;
+}
+
+.container:active {
+  background-color:#e74c3c;
+}
+
+.container:active .icon-microphone {
+  color:#ecf0f1;
+}
+
+.container:after {
+  position:absolute;
+  left:-65px;
+  top:0;
+  margin-top:63px;
+  color:#7f8c8d;
+  content:"CNC";
+}
+
+.container:before {
+  position:absolute;
+  left:180px;
+  top:0;
+  margin-top:63px;
+  color:#7f8c8d;
+  content:"Rocks!";
+}

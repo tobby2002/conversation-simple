@@ -112,7 +112,7 @@ var ConversationPanel = (function() {
     Common.fireEvent(input, 'input');
   }
 
-  // Display a user or Watson message that has just been sent/received
+  // Display a user or MRTALK message that has just been sent/received
   function displayMessage(newPayload, typeValue) {
     var isUser = isUserMessage(typeValue);
     var textExists = (newPayload.input && newPayload.input.text)
@@ -141,9 +141,9 @@ var ConversationPanel = (function() {
     }
   }
 
-  // Checks if the given typeValue matches with the user "name", the Watson "name", or neither
-  // Returns true if user, false if Watson, and null if neither
-  // Used to keep track of whether a message was from the user or Watson
+  // Checks if the given typeValue matches with the user "name", the MRTALK "name", or neither
+  // Returns true if user, false if MRTALK, and null if neither
+  // Used to keep track of whether a message was from the user or MRTALK
   function isUserMessage(typeValue) {
     if (typeValue === settings.authorTypes.user) {
       return true;
@@ -192,9 +192,9 @@ var ConversationPanel = (function() {
 
   // Scroll to the bottom of the chat window (to the most recent messages)
   // Note: this method will bring the most recent user message into view,
-  //   even if the most recent message is from Watson.
+  //   even if the most recent message is from MRTALK.
   //   This is done so that the "context" of the conversation is maintained in the view,
-  //   even if the Watson message is long.
+  //   even if the MRTALK message is long.
   function scrollToChatBottom() {
     var scrollingChat = document.querySelector('#scrollingChat');
 
