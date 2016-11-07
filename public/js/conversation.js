@@ -2,6 +2,9 @@
 // all display and behaviors of the conversation column of the app.
 /* eslint no-unused-vars: "off" */
 /* global Api: true, Common: true*/
+// var u = new SpeechSynthesisUtterance();
+// u.lang = 'ko-KR';
+// u.rate = 1.0;
 
 var ConversationPanel = (function() {
   var settings = {
@@ -34,13 +37,40 @@ var ConversationPanel = (function() {
   function chatUpdateSetup() {
     var currentRequestPayloadSetter = Api.setRequestPayload;
     Api.setRequestPayload = function(newPayloadStr) {
-      currentRequestPayloadSetter.call(Api, newPayloadStr);
-      displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.user);
+    currentRequestPayloadSetter.call(Api, newPayloadStr);
+    displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.user);
     };
 
     var currentResponsePayloadSetter = Api.setResponsePayload;
     Api.setResponsePayload = function(newPayloadStr) {
-      currentResponsePayloadSetter.call(Api, newPayloadStr);
+    currentResponsePayloadSetter.call(Api, newPayloadStr);
+
+      // 크롬 webkit만 가능하게 한다.
+      if(('webkitSpeechRecognition' in window)) {
+
+        //음성TTS
+        var jsonobj = eval("(" + newPayloadStr + ")");
+        var textarray = jsonobj["output"]["text"];
+        var speech = new Array();
+        // alert(newPayloadStr);
+        for (key in textarray) {
+          //alert(key);
+          speech += textarray[key];
+          //alert(speech);
+        }
+
+        utterance.text = speech;
+        speechUtteranceChunker(utterance, {
+          chunkLength: 120
+        }, function () {
+          //some code to execute when done
+          //console.log('done');
+          //alert("done");
+
+        });
+      }
+
+
       displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.watson);
     };
   }
@@ -118,6 +148,7 @@ var ConversationPanel = (function() {
     var textExists = (newPayload.input && newPayload.input.text)
       || (newPayload.output && newPayload.output.text);
     if (isUser !== null && textExists) {
+
       // Create new message DOM element
       var messageDivs = buildMessageDomElements(newPayload, isUser);
       var chatBoxElement = document.querySelector(settings.selectors.chatBox);

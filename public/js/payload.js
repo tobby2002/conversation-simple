@@ -104,7 +104,7 @@ var PayloadPanel = (function() {
       'children': [{
         // <div class='header-text'>
         'tagName': 'div',
-        'text': isRequest ? '유저 입력' : 'Mr.TALK',
+        'text': isRequest ? '유저입력' : 'Mr.TALK 인지분석',
         'classNames': ['header-text']
       }, {
         // <div class='code-line responsive-columns-wrapper'>
