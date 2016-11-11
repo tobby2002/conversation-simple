@@ -111,8 +111,8 @@ app.post( '/api/message', function(req, res) {
   }
 
   var options = {
-    uri: 'http://127.0.0.1:8000/api/v0/mrtalk/message',
-    //uri: 'http://45.32.106.253:8000/api/v0/mrtalk/message',
+    //uri: 'http://127.0.0.1:8000/api/v0/mrtalk/message',
+    uri: 'http://45.32.106.253:8000/api/v0/mrtalk/message',
     method: 'POST',
     json: payload
   };
