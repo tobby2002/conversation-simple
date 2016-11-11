@@ -60,7 +60,7 @@ var conversation = new Watson( {
 // workspace_id: 꽃배달 : 5686755c-5e5d-4c14-ae1f-6347639977f8
 // workspace_id: car_dashboard : ec688cd9-6a64-4a3b-834d-b9e2b2f6b921
 app.post( '/api/message', function(req, res) {
-  var workspace = process.env.WORKSPACE_ID || 'ec688cd9-6a64-4a3b-834d-b9e2b2f6b921';
+  var workspace = process.env.WORKSPACE_ID || '089d387b-d0e5-4513-8f32-cc06b8ebf7cb';
   // var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
   if ( !workspace || workspace === '<workspace-id>' ) {
     return res.json( {
@@ -89,7 +89,8 @@ app.post( '/api/message', function(req, res) {
           }
         ],
         "dialog_turn_counter": 0,
-        "dialog_request_counter": 0
+        "dialog_request_counter": 0,
+        "call_retrieve_and_rank": false
       },
       "default_counter": 0,
       "reprompt": false
