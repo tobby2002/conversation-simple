@@ -168,6 +168,7 @@
         console.log('update sign in state');
         if (auth2.isSignedIn.get()) {
             console.log('signed in');
+            alert("로그인성공")
             helper.onSignInCallback(gapi.auth2.getAuthInstance());
         }else{
             console.log('signed out');
