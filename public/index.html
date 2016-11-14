@@ -49,6 +49,7 @@
 
       FB.getLoginStatus(function(response) {
         alert(" 1 statusChangeCallback")
+        alert("response.status:"+response.status)
         statusChangeCallback(response);
       });
     }
