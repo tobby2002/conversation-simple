@@ -2,6 +2,7 @@
 <head>
   <base href="/">
   <title>Mrtalk Chat App</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta property="og:image" content="conversation.svg" />
@@ -44,7 +45,10 @@
     // Button.  See the onlogin handler attached to it in the sample
     // code below.
     function checkLoginState() {
+      alert("0 statusChangeCallback")
+
       FB.getLoginStatus(function(response) {
+        alert(" 1 statusChangeCallback")
         statusChangeCallback(response);
       });
     }
@@ -55,7 +59,7 @@
         cookie     : true,  // enable cookies to allow the server to access
                             // the session
         xfbml      : true,  // parse social plugins on this page
-        version    : 'v2.8' // use graph api version 2.8
+        version    : 'v2.5' // use graph api version 2.8
       });
 
       // Now that we've initialized the JavaScript SDK, we call
@@ -69,8 +73,9 @@
       //    your app or not.
       //
       // These three cases are handled in the callback function.
-      alert("here in fbAsyncInit");
+      alert("here in 1 fbAsyncInit");
       FB.getLoginStatus(function(response) {
+        alert("here in 2fbAsyncInit");
         statusChangeCallback(response);
       });
 
@@ -89,12 +94,12 @@
     // Here we run a very simple test of the Graph API after login is
     // successful.  See statusChangeCallback() for when this call is made.
     function testAPI() {
-      alert("welcome:");
+      alert("0 testAPI:");
 
       console.log('Welcome!  Fetching your information.... ');
       FB.api('/me', function(response) {
         console.log('Successful login for: ' + response.name);
-        alert("response.name:"+response.name);
+        alert("1 response.name:"+response.name);
         document.getElementById('status').innerHTML =
                 'Thanks for logging in, ' + response.name + '!';
       });
