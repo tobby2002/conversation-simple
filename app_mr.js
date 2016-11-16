@@ -19,7 +19,7 @@
 require( 'dotenv' ).config( {silent: true} );
 var express = require( 'express' );  // app server
 var bodyParser = require( 'body-parser' );  // parser for post requests
-var Watson = require( 'watson-developer-cloud/conversation/v1' );  // watson sdk
+// var Watson = require( 'watson-developer-cloud/conversation/v1' );  // watson sdk
 var request = require('request');
 
 // The following requires are needed for logging purposes
@@ -45,13 +45,13 @@ app.use( express.static( './public' ) ); // load UI from public folder
 app.use( bodyParser.json() );
 
 // Create the service wrapper
-var conversation = new Watson( {
-  url: 'https://gateway.watsonplatform.net/conversation/api',
-  username: process.env.CONVERSATION_USERNAME || 'ddf8db83-18f1-4f2e-a21e-f894c7aa650a',
-  password: process.env.CONVERSATION_PASSWORD || 'u4gSQeoUV61o',
-  version_date: '2016-09-20',
-  version: 'v1'
-} );
+// var conversation = new Watson( {
+//   url: 'https://gateway.watsonplatform.net/conversation/api',
+//   username: process.env.CONVERSATION_USERNAME || 'ddf8db83-18f1-4f2e-a21e-f894c7aa650a',
+//   password: process.env.CONVERSATION_PASSWORD || 'u4gSQeoUV61o',
+//   version_date: '2016-09-20',
+//   version: 'v1'
+// } );
 
 // http://stackoverflow.com/questions/6158933/how-to-make-an-http-post-request-in-node-js SimpleAPI
 
@@ -65,40 +65,38 @@ app.post( '/api/message', function(req, res) {
   if ( !workspace || workspace === '<workspace-id>' ) {
     return res.json( {
       'output': {
-        'text': 'The app has not been configured with a <b>WORKSPACE_ID</b> environment variable. Please refer to the ' +
-        '<a href="https://github.com/watson-developer-cloud/conversation-simple">README</a> documentation on how to set this variable. <br>' +
-        'Once a workspace has been defined the intents may be imported from ' +
-        '<a href="https://github.com/watson-developer-cloud/conversation-simple/blob/master/training/car_workspace.json">here</a> in order to get a working application.'
+        'text': 'The app has not been configured with a <b>WORKSPACE_ID</b>.'
       }
     } );
   }
-  // var payload = {
-  //   workspace_id: workspace,
-  //   context: {},
-  //   input: {}
-  // };
 
   var payload = {
-    "workspace_id": workspace,
-    "context": {
-      "conversation_id": "5166477c-2448-4968-9d31-77a1a583b167",
-      "system": {
-        "dialog_stack": [
-          {
-            "dialog_node": "root"
-          }
-        ],
-        "dialog_turn_counter": 0,
-        "dialog_request_counter": 0,
-        "call_retrieve_and_rank": false
-      },
-      "default_counter": 0,
-      "reprompt": false
-    },
-    "input": {
-      "text": ""
-    }
+    workspace_id: workspace,
+    context: {},
+    input: {}
   };
+
+  // var payload = {
+  //   "workspace_id": workspace,
+  //   "context": {
+  //     "conversation_id": "11111111-1111-1111-1111-111111111111",
+  //     "system": {
+  //       "dialog_stack": [
+  //         {
+  //           "dialog_node": "root"
+  //         }
+  //       ],
+  //       "dialog_turn_counter": 0,
+  //       "dialog_request_counter": 0,
+  //       "call_retrieve_and_rank": false
+  //     },
+  //     "default_counter": 0,
+  //     "reprompt": false
+  //   },
+  //   "input": {
+  //     "text": ""
+  //   }
+  // };
 
   if ( req.body ) {
     if ( req.body.input ) {
