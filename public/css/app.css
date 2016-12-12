@@ -5,7 +5,7 @@
 }
 
 body {
-  font-family: Helvetica Neue for W, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -157,7 +157,7 @@ div {
   border-top-right-radius: 1.25rem;
 }
 
-.from-watson .message-inner {
+.from-wson .message-inner {
   position: relative;
   border-radius: 1.5625rem;
   font-size: 1rem;
@@ -166,16 +166,16 @@ div {
   line-height: 1.3125rem;
 }
 
-.from-watson.latest .message-inner {
+.from-wson.latest .message-inner {
   color: #323232;
 }
 
-.from-watson p {
+.from-wson p {
   margin: 1.3125rem;
   padding: 0 1.25rem;
 }
 
-.from-watson.latest.top p:before {
+.from-wson.latest.top p:before {
   content: ".";
   color: #9855D4;
   /*background-image: url("../img/marker_image.png");*/
@@ -208,7 +208,7 @@ div {
   max-width: 100%;
   padding-left: 0.125rem;
   margin-bottom: -0.125rem;
-  font-family: Helvetica Neue for W, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 #textInput.underline {
@@ -273,7 +273,7 @@ input:-moz-placeholder {
 }
 
 #payload-column .header-text, #payload-column #payload-initial-message {
-  font-family: Helvetica Neue for W, Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-family: Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 1.125rem;
   color: #9E9E9E;
   letter-spacing: 0.01875rem;
@@ -341,7 +341,7 @@ html{
 
 /* IBM Design fonts https://github.ibm.com/Design/fonts */
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/light/h-n-light.eot?') format('eot'),
   url('../fonts/light/h-n-light.woff2') format('woff2'),
   url('../fonts/light/h-n-light.woff') format('woff'),
@@ -350,7 +350,7 @@ html{
   font-style: normal;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/light-italic/h-n-light-italic.eot?') format('eot'),
   url('../fonts/light-italic/h-n-light-italic.woff2') format('woff2'),
   url('../fonts/light-italic/h-n-light-italic.woff') format('woff'),
@@ -359,7 +359,7 @@ html{
   font-style: italic;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/roman/h-n-roman.eot?') format('eot'),
   url('../fonts/roman/h-n-roman.woff2') format('woff2'),
   url('../fonts/roman/h-n-roman.woff') format('woff'),
@@ -368,7 +368,7 @@ html{
   font-style: normal;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/roman-italic/h-n-roman-italic.eot?') format('eot'),
   url('../fonts/roman-italic/h-n-roman-italic.woff2') format('woff2'),
   url('../fonts/roman-italic/h-n-roman-italic.woff') format('woff'),
@@ -377,7 +377,7 @@ html{
   font-style: italic;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/medium/h-n-medium.eot?') format('eot'),
   url('../fonts/medium/h-n-medium.woff2') format('woff2'),
   url('../fonts/medium/h-n-medium.woff') format('woff'),
@@ -386,7 +386,7 @@ html{
   font-style: normal;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/medium-italic/h-n-medium-italic.eot?') format('eot'),
   url('../fonts/medium-italic/h-n-medium-italic.woff2') format('woff2'),
   url('../fonts/medium-italic/h-n-medium-italic.woff') format('woff'),
@@ -395,7 +395,7 @@ html{
   font-style: italic;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/bold/h-n-bold.eot?') format('eot'),
   url('../fonts/bold/h-n-bold.woff2') format('woff2'),
   url('../fonts/bold/h-n-bold.woff') format('woff'),
@@ -404,7 +404,7 @@ html{
   font-style: normal;
 }
 @font-face {
-  font-family: 'Helvetica Neue for W';
+  font-family: 'Helvetica Neue for IBM';
   src: url('../fonts/bold-italic/h-n-bold-italic.eot?') format('eot'),
   url('../fonts/bold-italic/h-n-bold-italic.woff2') format('woff2'),
   url('../fonts/bold-italic/h-n-bold-italic.woff') format('woff'),

@@ -8,12 +8,12 @@ var MrtalkRecongnition = (function() {
     selectors: {
       chatBox: '#scrollingChat',
       fromUser: '.from-user',
-      fromWatson: '.from-watson',
+      fromWson: '.from-wson',
       latest: '.latest'
     },
     authorTypes: {
       user: 'user',
-      watson: 'watson'
+      wson: 'wson'
     }
   };
 

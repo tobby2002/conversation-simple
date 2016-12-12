@@ -11,12 +11,12 @@ var ConversationPanel = (function() {
     selectors: {
       chatBox: '#scrollingChat',
       fromUser: '.from-user',
-      fromWatson: '.from-watson',
+      fromWson: '.from-wson',
       latest: '.latest'
     },
     authorTypes: {
       user: 'user',
-      watson: 'watson'
+      wson: 'wson'
     }
   };
 
@@ -74,7 +74,7 @@ var ConversationPanel = (function() {
       }
 
 
-      displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.watson);
+      displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.wson);
     };
   }
 
@@ -156,7 +156,7 @@ var ConversationPanel = (function() {
       var messageDivs = buildMessageDomElements(newPayload, isUser);
       var chatBoxElement = document.querySelector(settings.selectors.chatBox);
       var previousLatest = chatBoxElement.querySelectorAll((isUser
-              ? settings.selectors.fromUser : settings.selectors.fromWatson)
+              ? settings.selectors.fromUser : settings.selectors.fromWson)
               + settings.selectors.latest);
       // Previous "latest" message is no longer the most recent
       if (previousLatest) {
@@ -181,7 +181,7 @@ var ConversationPanel = (function() {
   function isUserMessage(typeValue) {
     if (typeValue === settings.authorTypes.user) {
       return true;
-    } else if (typeValue === settings.authorTypes.watson) {
+    } else if (typeValue === settings.authorTypes.wson) {
       return false;
     }
     return null;
@@ -202,9 +202,9 @@ var ConversationPanel = (function() {
           'tagName': 'div',
           'classNames': ['segments'],
           'children': [{
-            // <div class='from-user/from-watson latest'>
+            // <div class='from-user/from-wson latest'>
             'tagName': 'div',
-            'classNames': [(isUser ? 'from-user' : 'from-watson'), 'latest', ((messageArray.length === 0) ? 'top' : 'sub')],
+            'classNames': [(isUser ? 'from-user' : 'from-wson'), 'latest', ((messageArray.length === 0) ? 'top' : 'sub')],
             'children': [{
               // <div class='message-inner'>
               'tagName': 'div',
